@@ -1,0 +1,24 @@
+.form
+	&-input,
+	&-select,
+	&-textarea
+		display: block
+		width: 100%
+		outline: none
+		border: none
+		background: none
+		box-shadow: none
+		border-radius: 0
+
+	&-textarea
+		resize: vertical
+
+	&-select
+		appearance: none
+
+		&::-ms-expand
+			display: none
+
+		&:focus::-ms-value,
+		&::-ms-value
+			background: none

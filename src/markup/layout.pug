@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		meta(http-equiv="X-UA-Compatible", content="ie=edge")
+		// Browsers colors
+		meta(name="theme-color" content="")
+		meta(name="msapplication-navbutton-color" content="")
+		meta(name="apple-mobile-web-app-status-bar-style" content="")
+
+		block headTitle
+			title Sample Page
+
+		block styles
+			link(rel="stylesheet", href="assets/css/styles.css")
+
+	body
+		include components/header.pug
+		include components/content.pug
+		include components/footer.pug
+
+		block scripts
+			script(src="assets/js/bundle.js" defer)

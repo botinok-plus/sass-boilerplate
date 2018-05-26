@@ -1,0 +1,32 @@
+{
+	"name": "models-site",
+	"version": "1.0.0",
+	"repository": "https://botinok_plus@bitbucket.org/botinok_plus/models-site.git",
+	"author": "alex.zhylenkov <alex.zhylenkov@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.4",
+		"babel-preset-env": "^1.7.0",
+		"babel-register": "^6.26.0",
+		"bootstrap": "^4.1.1",
+		"browser-sync": "^2.24.4",
+		"gulp": "^3.9.1",
+		"gulp-autoprefixer": "^5.0.0",
+		"gulp-babel": "^7.0.1",
+		"gulp-group-css-media-queries": "^1.2.2",
+		"gulp-plumber": "^1.2.0",
+		"gulp-pug": "^4.0.1",
+		"gulp-rename": "^1.2.3",
+		"gulp-sass": "^4.0.1",
+		"gulp-uglify": "^3.0.0",
+		"gulp-watch": "^5.0.0",
+		"npm-sass": "^2.2.3",
+		"webpack": "^4.9.1",
+		"webpack-stream": "^4.0.3"
+	},
+	"scripts": {
+		"start": "gulp dev",
+		"build": "gulp prod"
+	}
+}

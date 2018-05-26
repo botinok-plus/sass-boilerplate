@@ -1,0 +1,86 @@
+// Base
+
+*,
+body
+	font-family: $base-ff
+	word-wrap: break-word
+
+html,
+body
+	background: #fff
+	font-size: $base-fz
+	min-width: $screen-xs-min
+
+body
+	animation-name: fadeIn
+	animation-duration: .4s
+	position: relative
+
+a
+	color: $link-color
+	transition: color .2s ease
+
+	&:focus,
+	&:hover
+		text-decoration: none
+		color: $link-hover-color
+
+	&:active
+		color: $link-action-color
+
+nav
+	ul
+		@extend .reset-list
+
+img
+	max-width: 100%
+	height: auto
+	backface-visibility: hidden
+
+.responsive-bg
+	background-position: 50% 50%
+	background-size: cover
+	background-repeat: no-repeat
+
+.reset
+	padding: 0
+	margin: 0
+
+	&-list
+		@extend .reset
+		list-style: none
+
+	&-btn
+		@extend .reset
+		display: inline-block
+		vertical-align: top
+		border-radius: 0
+		border: none
+		outline: none
+		background: none
+		line-height: 1.2em
+		text-align: center
+
+		&.disabled,
+		&[disabled]
+			opacity: .6
+			cursor: default
+			pointer-events: none
+
+		&.half-width,
+		&.full-width
+			display: block
+		
+		&.half-width
+			min-width: 50%
+		
+		&.full-width
+			width: 100%
+
+	&-inline-spacing
+		letter-spacing: -1px
+		font-size: 0
+
+		> *
+			letter-spacing: 0
+			font-size: $base-fz

@@ -1,0 +1,32 @@
+//buttons
+button,
+input[type="submit"],
+*[class^="btn-"]
+	@extend .reset-btn
+
+.buttons-list
+	@extend .reset-list
+	@extend .reset-inline-spacing
+
+	> *
+		display: inline-block
+		vertical-align: top
+		margin-bottom: 24px
+
+		+bp-xs
+			width: 100%
+			display: block
+
+			[class*="btn-"]
+				display: block
+				width: 100%
+
+		&:not(:first-child),
+		&:not(.hidden) ~ *.hidden + *:not(.hidden)
+			margin-left: 24px
+
+			+bp-xs
+				margin-left: 0
+
+		&.hidden + *:not(.hidden)
+			margin-left: 0

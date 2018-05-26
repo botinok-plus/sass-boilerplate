@@ -1,0 +1,143 @@
+//font-face (@include font-face(fontName, fonts/fontName, 500, normal, eot woff2 woff))
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+//px to rem calculator
+@function px-rem($px) {
+	$rem: $px / $base-fz;
+	@return $px * 1rem;
+}
+
+//rem font-size with fallback
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: px-rem($size);
+}
+
+//placeholder (@include placeholder { })
+@mixin fplaceholder {
+	&[placeholder]  { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&:-ms-input-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}
+
+//text-elipsis (@include text-elipsis(120px))
+@mixin text-elipsis($container-width) {
+	max-width: $container-width;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+//responsive-ratio (@include text-elipsis(16,9))
+@mixin responsive-ratio($x,$y, $pseudo: true) {
+	$padding: unquote( ( $y / $x ) * 100 + '%' );
+	@if $pseudo {
+		&:before {
+			content: '';
+			display: block;
+			position: relative;
+			width: 100%;
+			padding-top: $padding;
+		}
+	} @else {
+		padding-top: $padding;
+	}
+}
+
+//responsive breackpoints
+
+@mixin bp-xl {
+	@media (min-width: $screen-xl-min) {
+		@content;
+	}
+}
+@mixin bp-lg {
+	@media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+		@content;
+	}
+}
+
+@mixin bp-md {
+	@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+		@content;
+	}
+}
+
+@mixin bp-sm {
+	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+		@content;
+	}
+}
+
+@mixin bp-xs {
+	@media (max-width: $screen-xs-max) {
+		@content;
+	}
+}
+
+@mixin bp-custom($resolution-min: false, $resolution-max: false) {
+	@if $resolution-min {
+		@if $resolution-max {
+			@media (min-width: $resolution-min) and (max-width: $resolution-max) {
+				@content;
+			}
+		} @else {
+			@media (min-width: $resolution-min) {
+				@content;
+			}
+		}
+	} @else {
+		@if $resolution-max {
+			@media (max-width: $resolution-max) {
+				@content;
+			}
+		}
+	}
+}
+
+@mixin bp-v-custom($resolution-min: false, $resolution-max: false) {
+	@if $resolution-min {
+		@if $resolution-max {
+			@media (min-height: $resolution-min) and (max-height: $resolution-max) {
+				@content;
+			}
+		} @else {
+			@media (min-height: $resolution-min) {
+				@content;
+			}
+		}
+	} @else {
+		@if $resolution-max {
+			@media (max-height: $resolution-max) {
+				@content;
+			}
+		}
+	}
+}
