@@ -1,4 +1,5 @@
 import gulp from 'gulp';
+import changed from 'gulp-changed';
 import watch from 'gulp-watch';
 import plumber from 'gulp-plumber';
 import babel from 'gulp-babel';
@@ -46,6 +47,7 @@ gulp.task('dev', ['browser-sync'], () => {
 
 // pug-loader
 gulp.task('pug-loader', () => gulp.src([path.join(__dirname, 'src/markup/pages', '*.pug')])
+	.pipe(changed(path.join(__dirname, 'app'), { extension: '.html' }))
 	.pipe(plumber())
 	.pipe(pug({
 		pretty: true
