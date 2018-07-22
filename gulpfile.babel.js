@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import changed from 'gulp-changed';
+//import changed from 'gulp-changed';
 import watch from 'gulp-watch';
 import plumber from 'gulp-plumber';
 import babel from 'gulp-babel';
@@ -47,7 +47,7 @@ gulp.task('dev', ['browser-sync'], () => {
 
 // pug-loader
 gulp.task('pug-loader', () => gulp.src([path.join(__dirname, 'src/markup/pages', '*.pug')])
-	.pipe(changed(path.join(__dirname, 'app'), { extension: '.html' }))
+	//.pipe(changed(path.join(__dirname, 'app'), { extension: '.html' }))
 	.pipe(plumber())
 	.pipe(pug({
 		pretty: true
@@ -73,6 +73,7 @@ gulp.task('styles-loader', () => gulp.src([path.join(__dirname, 'src/styles/inc.
 gulp.task('js-loader', () => gulp.src([path.join(__dirname, 'src/scripts/**/*.js')])
 	.pipe(plumber())
 	.pipe(webpackStream({
+		mode: 'development',
 		output: {
 			filename: 'bundle.js'
 		},
@@ -87,8 +88,15 @@ gulp.task('js-loader', () => gulp.src([path.join(__dirname, 'src/scripts/**/*.js
 					}
 				}
 			]
-		}
-	}))
+		},
+		plugins: [
+			new webpack.ProvidePlugin({
+				$: 'jquery',
+				jQuery: 'jquery',
+				'window.jQuery': 'jquery'
+			})
+		]
+	}, webpack))
 	//.pipe(uglify())
 	.pipe(gulp.dest(path.join(__dirname, 'app/assets/js')))
 	.pipe(browserSync.stream())
